@@ -5,18 +5,22 @@ const Signup = require("../Models/Signup");
 // POST /api/signup
 router.post("/signup", async (req, res) => {
   try {
-    const { name, email,password, mobile, designation } = req.body;
+    const { name, email, password, mobile, designation, branch } = req.body;
 
-    // Create new signup document
+    // Validation: HOD must have a branch
+    if (designation === "HOD" && !branch) {
+      return res.status(400).json({ message: "Branch is required for HOD" });
+    }
+
     const newUser = new Signup({
       name,
       email,
       password,
       mobile,
       designation,
+      branch: designation === "HOD" ? branch : null,
     });
 
-    // Save to database
     await newUser.save();
 
     res.json({ message: "User registered successfully" });
@@ -26,5 +30,6 @@ router.post("/signup", async (req, res) => {
     res.status(500).json({ message: "Error saving user", error });
   }
 });
+
 
 module.exports = router;

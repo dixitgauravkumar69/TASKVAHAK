@@ -29,6 +29,7 @@ const signupSchema = new mongoose.Schema(
       enum: ["Faculty", "HOD", "Principal"], 
       required: true,
     },
+    branch: { type: String, default: null },
   },
   { timestamps: true }
 );
