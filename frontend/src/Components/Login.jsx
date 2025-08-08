@@ -8,7 +8,7 @@ const Login = () => {
   });
 
   const [message, setMessage] = useState('');
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate(); 
 
   const handleChange = (e) => {
     setFormData({
@@ -34,8 +34,18 @@ const Login = () => {
       if (response.ok) {
         setMessage(data.message);
         const role = data.designation;
+        const branch = data.branch;
+        console.log('Branch:', branch);
 
         console.log('Role:', role);
+
+        // Store user data in localStorage (optional)
+        localStorage.setItem('user', JSON.stringify({
+          name: data.name,
+          email: data.email,
+          designation: role,
+          branch: branch,
+        }));
 
         // ✅ Navigate based on role
         if (role === 'HOD') {

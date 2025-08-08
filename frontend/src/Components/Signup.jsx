@@ -7,6 +7,7 @@ function Signup() {
     password: "",
     mobile: "",
     designation: "none",
+    branch: "none", // added branch
   });
 
   const handleChange = (e) => {
@@ -20,8 +21,13 @@ function Signup() {
   const submit = async (e) => {
     e.preventDefault();
 
-     if (form.designation === "none") {
+    if (form.designation === "none") {
       alert("Please select a designation before submitting.");
+      return;
+    }
+
+    if (form.designation === "HOD" && form.branch === "none") {
+      alert("Please select a branch for HOD.");
       return;
     }
 
@@ -34,15 +40,14 @@ function Signup() {
       const data = await res.json();
       console.log("Frontend response:", data.message);
 
-      
-        setForm({
-          name: "",
-          email: "",
-          password: "",
-          mobile: "",
-          designation: "none",
-        });
-        
+      setForm({
+        name: "",
+        email: "",
+        password: "",
+        mobile: "",
+        designation: "none",
+        branch: "none",
+      });
     } catch (error) {
       console.error("Error sending form:", error);
     }
@@ -55,6 +60,7 @@ function Signup() {
           Signup
         </h2>
         <form onSubmit={submit} className="space-y-4">
+          {/* Name */}
           <div>
             <label className="block text-gray-700 font-medium mb-1">Name</label>
             <input
@@ -68,6 +74,7 @@ function Signup() {
             />
           </div>
 
+          {/* Email */}
           <div>
             <label className="block text-gray-700 font-medium mb-1">Email</label>
             <input
@@ -81,9 +88,10 @@ function Signup() {
             />
           </div>
 
+          {/* Password */}
           <div>
             <label className="block text-gray-700 font-medium mb-1">Password</label>
-             <input
+            <input
               type="password"
               name="password"
               value={form.password}
@@ -94,6 +102,7 @@ function Signup() {
             />
           </div>
 
+          {/* Mobile */}
           <div>
             <label className="block text-gray-700 font-medium mb-1">Mobile</label>
             <input
@@ -108,6 +117,7 @@ function Signup() {
             />
           </div>
 
+          {/* Designation */}
           <div>
             <label className="block text-gray-700 font-medium mb-1">Designation</label>
             <select
@@ -124,6 +134,28 @@ function Signup() {
             </select>
           </div>
 
+          {/* Branch dropdown — only if HOD */}
+          {form.designation === "HOD" && (
+            <div>
+              <label className="block text-gray-700 font-medium mb-1">Branch</label>
+              <select
+                name="branch"
+                value={form.branch}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                required
+              >
+                <option value="none">Select Branch</option>
+                <option value="CSE & Allied">CSE & Allied</option>
+                <option value="Mechanical">Mechanical</option>
+                <option value="Civil">Civil</option>
+                <option value="EC">EC</option>
+                <option value="EE">EE</option>
+              </select>
+            </div>
+          )}
+
+          {/* Submit */}
           <button
             type="submit"
             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition-all duration-300"
