@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const signupRoutes = require("./routes/Signup");  
 const loginRoutes = require("./routes/Login");  
 const taskRoute=require("./routes/Principle_Task");
-
+const hodRoute = require("./routes/Hod");
 
 const cors = require("cors");
 const app = express();
@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 app.use("/api", signupRoutes);  
 app.use("/api", loginRoutes);  
 app.use("/api/tasks", taskRoute);
-
+app.use("/api/tasks", hodRoute);
 
 app.listen(5000, () => {
   console.log("Server running on port 5000");

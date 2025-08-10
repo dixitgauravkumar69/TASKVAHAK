@@ -8,6 +8,7 @@ const taskSchema = new mongoose.Schema({
   status: { type: String, default: "Pending" },
   hodStatus: { type: String, default: null },
   createdBy: { type: String, required: true }, // Principal's ID or email
+   isVisibleToHod: { type: Boolean, default: false },
 }, { timestamps: true });
 
 module.exports = mongoose.model("Task", taskSchema);
