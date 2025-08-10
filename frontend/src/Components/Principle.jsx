@@ -83,13 +83,18 @@ const Principle = () => {
   };
 
   const assignToHOD = async (id) => {
-    try {
-      const updated = await axios.put(`http://localhost:5000/api/tasks/${id}`, { status: "Assigned to HOD", hodStatus: "Pending" });
-      setTasks((prev) => prev.map((task) => (task._id === id ? updated.data : task)));
-    } catch (err) {
-      console.error("Error assigning task:", err);
-    }
-  };
+  try {
+    const updated = await axios.put(`http://localhost:5000/api/tasks/${id}`, {
+      status: "Assigned to HOD",
+      hodStatus: "Pending",
+      isVisibleToHod: true // ✅ Added
+    });
+    setTasks((prev) => prev.map((task) => (task._id === id ? updated.data : task)));
+  } catch (err) {
+    console.error("Error assigning task:", err);
+  }
+};
+
 
   const viewHODStatus = (status) => {
     alert(`HOD Status: ${status}`);
