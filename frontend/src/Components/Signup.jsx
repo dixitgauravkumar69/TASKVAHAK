@@ -135,7 +135,7 @@ function Signup() {
           </div>
 
           {/* Branch dropdown — only if HOD */}
-          {form.designation === "HOD" && (
+          {(form.designation === "HOD" || form.designation === "Faculty") && (
             <div>
               <label className="block text-gray-700 font-medium mb-1">Branch</label>
               <select

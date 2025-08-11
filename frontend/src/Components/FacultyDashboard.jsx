@@ -8,7 +8,7 @@ const FacultyDashboard = () => {
     if (storedUser && storedUser.designation === "Faculty") {
       setUser(storedUser);
     } else {
-      alert("Access Denied! Only HODs can access this dashboard.");
+      alert("Access Denied! Only faculty can access this dashboard.");
       window.location.href = "/";
     }
   }, []);
@@ -26,11 +26,12 @@ const FacultyDashboard = () => {
         <p className="text-gray-600 mt-2">
           Designation: <span className="font-medium">{user.designation}</span>
         </p>
-
         
-        {/* <p className="text-gray-600">
+      
+        
+        <p className="text-gray-600">
           Branch: <span className="font-medium text-blue-600">{user.branch}</span>
-        </p> */}
+        </p>
 
       </div>
     </div>
