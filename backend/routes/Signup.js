@@ -18,7 +18,7 @@ router.post("/signup", async (req, res) => {
       password,
       mobile,
       designation,
-      branch: designation === "HOD" ? branch : null,
+      branch: designation === "HOD" || designation === "Faculty" ? branch : null,
     });
 
     await newUser.save();
